@@ -2,7 +2,7 @@ class PerfectNumber
 
   def self.classify(number)
     raise "This number is not a natural number" unless is_natural?(number)
- 
+
     sum = sum_divisors(factorize(number))
 
     if sum == number
@@ -20,18 +20,12 @@ class PerfectNumber
   end
 
   def self.factorize(number)
-    factors = [1, number]
-    (2..Math.sqrt(number)).each do |factor|
-      if number % factor == 0
-        factors <<  factor << (number/factor)
-      end
+    (1...number).select do |num|
+      number % num == 0
     end
-    factors.uniq.sort
   end
 
   def self.sum_divisors(factors)
-    factors.sort
-    factors.pop
     factors.reduce(:+)
   end
 end
